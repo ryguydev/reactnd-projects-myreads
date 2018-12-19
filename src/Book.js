@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 function Book(props) {
-  let { className, cover, title, authors } = props;
+  let { className, cover, title, authors, id, handleShelfChange } = props;
   console.log(typeof authors)
   return (
     <div className={className}>

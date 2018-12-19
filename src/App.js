@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import './App.css'
 import * as BooksAPI from './BooksAPI'
 import BookShelf from './BookShelf'
+import BookList from './BookList'
+import Book from './Book'
 import SearchBooks from './SearchBooks'
 
 class BooksApp extends Component {
@@ -24,6 +26,12 @@ class BooksApp extends Component {
           books: allBooks
         }))
       })
+  }
+
+  handleBookShelfUpdate = (e) => {
+    this.setState( currentState => {
+
+    })
   }
 
   render() {
@@ -60,18 +68,31 @@ class BooksApp extends Component {
                 <BookShelf
                   className="bookshelf"
                   bookShelfTitle="Currently Reading"
-                  books={this.state.books.filter( book => book.shelf === 'currentlyReading' )}
-                ></BookShelf>
+                  bookList={
+                    <BookList
+                      className="books-grid"
+                      books={this.state.books
+                        .filter( book => book.shelf === 'currentlyReading' )}>
+                    </BookList>}>
+                </BookShelf>
                 <BookShelf
                   className="bookshelf"
                   bookShelfTitle="Want To Read"
-                  books={this.state.books.filter( book => book.shelf === 'wantToRead' )}
-                ></BookShelf>
+                  bookList={
+                    <BookList
+                      className="books-grid"
+                      books={this.state.books.filter( book => book.shelf === 'wantToRead' )}>
+                    </BookList>}>
+                </BookShelf>
                 <BookShelf
                   className="bookshelf"
                   bookShelfTitle="Read"
-                  books={this.state.books.filter( book => book.shelf === 'read' )}
-                ></BookShelf>
+                  bookList={
+                    <BookList
+                      className="books-grid"
+                      books={this.state.books.filter( book => book.shelf === 'read' )}>
+                    </BookList>}>
+                </BookShelf>
               </div>
             </div>
             <div className="open-search">

@@ -2,7 +2,7 @@ import React from 'react'
 import Book from './Book'
 
 function BookList(props) {
-  const books = props.books;
+  const { books } = props;
   const bookList = books.map( book => {
     return (
       <li key={book.id}>
@@ -18,7 +18,6 @@ function BookList(props) {
   return (
     <ul className={props.className}>{bookList}</ul>
   )
-  
 }
 
 export default BookList

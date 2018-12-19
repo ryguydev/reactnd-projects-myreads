@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 
 class SearchBooks extends Component {
-
+  state = {
+    showSearchPage: this.showSearchPage
+  }
   render() {
     return (
       <div className="search-books">
