@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-// import * as BooksAPI from './BooksAPI'
 import './App.css'
 import * as BooksAPI from './BooksAPI'
 import BookShelf from './BookShelf'
 import BookList from './BookList'
 import Book from './Book'
+import ShelfChanger from './ShelfChanger'
 import SearchBooks from './SearchBooks'
 
 class BooksApp extends Component {
@@ -71,8 +71,27 @@ class BooksApp extends Component {
                   bookList={
                     <BookList
                       className="books-grid"
-                      books={this.state.books
-                        .filter( book => book.shelf === 'currentlyReading' )}>
+                      books={ this.state.books
+                        .filter( book => book.shelf === 'currentlyReading' )
+                        .map( book => {
+                          return (
+                            <li key={book.id}>
+                              <Book
+                                className="book"
+                                cover={book.imageLinks.smallThumbnail}
+                                title={book.title}
+                                authors={book.authors}
+                                shelfChanger={
+                                  <ShelfChanger
+                                    bookID={book.id}
+                                    handleShelfChange={this.handleBookShelfUpdate}
+                                ></ShelfChanger>
+                                }
+                              ></Book>
+                            </li>
+                          )
+                        })
+                      }>
                     </BookList>}>
                 </BookShelf>
                 <BookShelf
@@ -81,7 +100,27 @@ class BooksApp extends Component {
                   bookList={
                     <BookList
                       className="books-grid"
-                      books={this.state.books.filter( book => book.shelf === 'wantToRead' )}>
+                      books={ this.state.books
+                        .filter( book => book.shelf === 'wantToRead' )
+                        .map( book => {
+                          return (
+                            <li key={book.id}>
+                              <Book
+                                className="book"
+                                cover={book.imageLinks.smallThumbnail}
+                                title={book.title}
+                                authors={book.authors}
+                                shelfChanger={
+                                  <ShelfChanger
+                                    bookID={book.id}
+                                    handleShelfChange={this.handleBookShelfUpdate}
+                                ></ShelfChanger>
+                                }
+                              ></Book>
+                            </li>
+                          )
+                        })
+                      }>
                     </BookList>}>
                 </BookShelf>
                 <BookShelf
@@ -90,7 +129,27 @@ class BooksApp extends Component {
                   bookList={
                     <BookList
                       className="books-grid"
-                      books={this.state.books.filter( book => book.shelf === 'read' )}>
+                      books={ this.state.books
+                        .filter( book => book.shelf === 'read' )
+                        .map( book => {
+                          return (
+                            <li key={book.id}>
+                              <Book
+                                className="book"
+                                cover={book.imageLinks.smallThumbnail}
+                                title={book.title}
+                                authors={book.authors}
+                                shelfChanger={
+                                  <ShelfChanger
+                                    bookID={book.id}
+                                    handleShelfChange={this.handleBookShelfUpdate}
+                                ></ShelfChanger>
+                                }
+                              ></Book>
+                            </li>
+                          )
+                        })
+                      }>
                     </BookList>}>
                 </BookShelf>
               </div>
