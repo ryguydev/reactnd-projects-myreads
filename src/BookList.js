@@ -1,5 +1,4 @@
 import React from 'react'
-import Book from './Book'
 
 function BookList(props) {
   const { className, books } = props;

@@ -5,7 +5,7 @@ import BookShelf from './BookShelf'
 import BookList from './BookList'
 import Book from './Book'
 import ShelfChanger from './ShelfChanger'
-import SearchBooks from './SearchBooks'
+//import SearchBooks from './SearchBooks'
 
 class BooksApp extends Component {
   state = {
@@ -29,9 +29,14 @@ class BooksApp extends Component {
   }
 
   handleBookShelfUpdate = (e) => {
-    this.setState( currentState => {
-
-    })
+    const { id: bookID , value: shelf } = e.target
+    BooksAPI.get(bookID)
+      .then( book => BooksAPI.update( book, shelf )
+        .then( BooksAPI.getAll()
+          .then( allBooks => {
+            this.setState({ books: allBooks })
+        })
+      ))
   }
 
   render() {
