@@ -1,7 +1,7 @@
 import React from 'react'
 
 function SearchBooks(props) {
-  const { className, onChange: handleSearchQueryChange } = props
+  const { className, onChange: handleSearchQueryChange, searchResults } = props
   return (
     <div className={className}>
       <div className="search-books-bar">

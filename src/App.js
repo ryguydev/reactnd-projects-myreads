@@ -5,18 +5,11 @@ import BookShelf from './BookShelf'
 import BookList from './BookList'
 import Book from './Book'
 import ShelfChanger from './ShelfChanger'
-import { Route } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import SearchBooks from './SearchBooks'
 
 class BooksApp extends Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    showSearchPage: false,
     books: [],
     searchQuery: '',
     searchResults: []
@@ -46,8 +39,12 @@ class BooksApp extends Component {
     const { value: queryValue } = event.target
     if ( queryValue ) {
       BooksAPI.search( queryValue )
-        .then( result => this.setState({ searchResults: result }))
-        .catch( this.setState({ searchResults: [] }))
+        .then( result => {
+          result.hasOwnProperty("error") ? this.setState({ searchResults: [] }) : this.setState({ searchResults: result })
+        })
+        .catch( error => {
+          this.setState({ searchResults: [] })
+        })
     } else {
       this.setState({ searchResults: [] })
     }
@@ -56,11 +53,13 @@ class BooksApp extends Component {
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
+        <Route exact path="/search" render={ () => (
           <div 
             className="search-books">
             <div className="search-books-bar">
-              <button className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</button>
+              <button className="close-search">
+                <Link to="/" style={{display: "block", height: "100%"}}></Link>
+              </button>
               <div className="search-books-input-wrapper">
                 {this.searchQuery}
                 <input 
@@ -78,7 +77,7 @@ class BooksApp extends Component {
                       <li key={book.id}>
                         <Book
                           className="book"
-                          cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : "?"}
+                          cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : "Image Not Available"}
                           title={book.title}
                           authors={book.authors}
                           shelfChanger={
@@ -95,7 +94,8 @@ class BooksApp extends Component {
               </BookList>
             </div>
           </div>
-        ) : (
+        )}/>
+        <Route exact path="/" render={ () => (
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
@@ -192,10 +192,12 @@ class BooksApp extends Component {
               </div>
             </div>
             <div className="open-search">
-              <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
+              <button> 
+                <Link to="/search" style={{display: "block", height: "100%"}}></Link>
+              </button>
             </div>
           </div>
-        )}
+        )}/>
       </div>
     )
   }
