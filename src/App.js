@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import './App.css'
 import * as BooksAPI from './BooksAPI'
-import SearchBookResults from './SearchBookResults'
+import SearchBooks from './SearchBooks'
+import SearchBooksBar from './SearchBooksBar'
+import SearchBooksResults from './SearchBooksResults'
+import ListBooks from './ListBooks'
 import BookShelf from './BookShelf'
 import BookList from './BookList'
 import BookListItem from './BookListItem'
 import Book from './Book'
 import ShelfChanger from './ShelfChanger'
+import OpenSearch from './OpenSearch'
 import { Route, Link } from 'react-router-dom'
-//import SearchBooks from './SearchBooks'
 
 class BooksApp extends Component {
   state = {
@@ -56,153 +59,150 @@ class BooksApp extends Component {
     return (
       <div className="app">
         <Route exact path="/search" render={ () => (
-          <div 
-            className="search-books">
-            <div className="search-books-bar">
-              <button className="close-search">
-                <Link to="/" style={{display: "block", height: "100%"}}></Link>
-              </button>
-              <div className="search-books-input-wrapper">
-                {this.searchQuery}
-                <input 
-                  type="text" 
-                  placeholder="Search by title or author"
-                  onChange={this.handleSearchQueryChange}
-                />
-              </div>
-            </div>
-            <SearchBookResults
-              className="search-books-results"
-              bookList={
-                <BookList
-                  className="books-grid"
-                  books={this.state.searchResults.length === 0 ? "No results found" : this.state.searchResults.map( book => 
-                    <BookListItem
-                      key={book.id}
-                      book={
-                        <Book
-                          className="book"
-                          cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : "Image Not Available"}
-                          title={book.title}
-                          authors={book.hasOwnProperty('authors') ? book.authors : "Author Unknown"}
-                          shelfChanger={
-                            <ShelfChanger
-                              bookID={book.id}
-                              currentShelf={book.shelf}
-                              handleShelfChange={this.handleBookShelfUpdate}
-                            />
-                          }
-                        />
-                      }
-                    />
-                  )}
-                />
-              }
-            />
-          </div>
+          <SearchBooks
+            className="search-books"
+            searchBooksBar={
+              <SearchBooksBar 
+                className="search-books-bar"
+                searchQuery={this.searchQuery}
+                handleSearchQueryChange={this.handleSearchQueryChange}
+                pathBack="/"
+              />
+            }
+            searchBooksResults={
+              <SearchBooksResults
+                className="search-books-results"
+                bookList={
+                  <BookList
+                    className="books-grid"
+                    books={this.state.searchResults.length === 0 ? "No results found" : this.state.searchResults.map( book => 
+                      <BookListItem
+                        key={book.id}
+                        book={
+                          <Book
+                            className="book"
+                            cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : "Image Not Available"}
+                            title={book.title}
+                            authors={book.hasOwnProperty('authors') ? book.authors : "Author Unknown"}
+                            shelfChanger={
+                              <ShelfChanger
+                                bookID={book.id}
+                                currentShelf={book.shelf}
+                                handleShelfChange={this.handleBookShelfUpdate}
+                              />
+                            }
+                          />
+                        }
+                      />
+                    )}
+                  />
+                }
+              />
+            }
+          />
         )}/>
         <Route exact path="/" render={ () => (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
-                <BookShelf
-                  className="bookshelf"
-                  bookShelfTitle="Currently Reading"
-                  bookList={
-                    <BookList
-                      className="books-grid"
-                      books={ this.state.books
-                        .filter( book => book.shelf === 'currentlyReading' )
-                        .map( book => {
-                          return (
-                            <li key={book.id}>
+          <div>
+            <ListBooks
+              className="list-books"
+              heading="My Reads"
+              listBooksContent={
+                <div>
+                  <BookShelf
+                    className="bookshelf"
+                    bookShelfTitle="Currently Reading"
+                    bookList={
+                      <BookList
+                        className="books-grid"
+                        books={this.state.books.filter( book => book.shelf === 'currentlyReading').map( book => 
+                          <BookListItem
+                            key={book.id}
+                            book={
                               <Book
                                 className="book"
-                                cover={book.imageLinks.smallThumbnail}
+                                cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : "Image Not Available"}
                                 title={book.title}
-                                authors={book.authors}
+                                authors={book.hasOwnProperty('authors') ? book.authors : "Author Unknown"}
                                 shelfChanger={
                                   <ShelfChanger
                                     bookID={book.id}
+                                    currentShelf={book.shelf}
                                     handleShelfChange={this.handleBookShelfUpdate}
-                                ></ShelfChanger>
+                                  />
                                 }
-                              ></Book>
-                            </li>
-                          )
-                        })
-                      }>
-                    </BookList>}>
-                </BookShelf>
-                <BookShelf
-                  className="bookshelf"
-                  bookShelfTitle="Want To Read"
-                  bookList={
-                    <BookList
-                      className="books-grid"
-                      books={ this.state.books
-                        .filter( book => book.shelf === 'wantToRead' )
-                        .map( book => {
-                          return (
-                            <li key={book.id}>
+                              />
+                            }
+                          />
+                        )}
+                      />
+                    }
+                  />
+                  <BookShelf
+                    className="bookshelf"
+                    bookShelfTitle="Want To Read"
+                    bookList={
+                      <BookList
+                        className="books-grid"
+                        books={this.state.books.filter( book => book.shelf === 'wantToRead').map( book => 
+                          <BookListItem
+                            key={book.id}
+                            book={
                               <Book
                                 className="book"
-                                cover={book.imageLinks.smallThumbnail}
+                                cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : "Image Not Available"}
                                 title={book.title}
-                                authors={book.authors}
+                                authors={book.hasOwnProperty('authors') ? book.authors : "Author Unknown"}
                                 shelfChanger={
                                   <ShelfChanger
                                     bookID={book.id}
+                                    currentShelf={book.shelf}
                                     handleShelfChange={this.handleBookShelfUpdate}
-                                ></ShelfChanger>
+                                  />
                                 }
-                              ></Book>
-                            </li>
-                          )
-                        })
-                      }>
-                    </BookList>}>
-                </BookShelf>
-                <BookShelf
-                  className="bookshelf"
-                  bookShelfTitle="Read"
-                  bookList={
-                    <BookList
-                      className="books-grid"
-                      books={ this.state.books
-                        .filter( book => book.shelf === 'read' )
-                        .map( book => {
-                          return (
-                            <li key={book.id}>
+                              />
+                            }
+                          />
+                        )}
+                      />
+                    }
+                  />
+                  <BookShelf
+                    className="bookshelf"
+                    bookShelfTitle="Read"
+                    bookList={
+                      <BookList
+                        className="books-grid"
+                        books={this.state.books.filter( book => book.shelf === 'read').map( book => 
+                          <BookListItem
+                            key={book.id}
+                            book={
                               <Book
                                 className="book"
-                                cover={book.imageLinks.smallThumbnail}
+                                cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : "Image Not Available"}
                                 title={book.title}
-                                authors={book.authors}
+                                authors={book.hasOwnProperty('authors') ? book.authors : "Author Unknown"}
                                 shelfChanger={
                                   <ShelfChanger
                                     bookID={book.id}
+                                    currentShelf={book.shelf}
                                     handleShelfChange={this.handleBookShelfUpdate}
-                                ></ShelfChanger>
+                                  />
                                 }
-                              ></Book>
-                            </li>
-                          )
-                        })
-                      }>
-                    </BookList>}>
-                </BookShelf>
-              </div>
-            </div>
-            <div className="open-search">
-              <button> 
-                <Link to="/search" style={{display: "block", height: "100%"}}></Link>
-              </button>
-            </div>
-          </div>
+                              />
+                            }
+                          />
+                        )}
+                      />
+                    }
+                  />
+                </div>
+              }
+            />
+          <OpenSearch
+            className="open-search"
+            pathToSearch="/search"
+          />
+        </div>
         )}/>
       </div>
     )

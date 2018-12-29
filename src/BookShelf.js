@@ -1,11 +1,12 @@
 import React from 'react'
 
 function BookShelf(props) {
+  const { className, bookShelfTitle, bookList } = props
   return (
-    <div className={props.className}>
-      <h2 className="bookshelf-title">{props.bookShelfTitle}</h2>
+    <div className={className}>
+      <h2 className="bookshelf-title">{bookShelfTitle}</h2>
       <div className="bookshelf-books">
-        {props.bookList}
+        {bookList}
       </div>
     </div>
   )
