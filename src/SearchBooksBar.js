@@ -12,7 +12,7 @@ function SearchBooksBar(props) {
         <input 
           type="text" 
           placeholder="Search by title or author"
-          value={searchQuery}
+          value={searchQuery || ''}
           onChange={handleSearchQueryChange}/>
       </div>
     </div>
