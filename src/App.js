@@ -23,9 +23,10 @@ class BooksApp extends Component {
   componentDidMount() {
     BooksAPI.getAll()
       .then( allBooks => {
-        this.setState( () => ({
-          books: allBooks
-        }))
+        this.setState({ 
+          books: allBooks,
+          searchQuery: this.searchQuery
+        })
       })
   }
 
@@ -42,6 +43,7 @@ class BooksApp extends Component {
 
   handleSearchQueryChange = (event) => {
     const { value: queryValue } = event.target
+    this.setState({ searchQuery: queryValue })
     if ( queryValue ) {
       BooksAPI.search( queryValue )
         .then( result => {
@@ -64,7 +66,7 @@ class BooksApp extends Component {
             searchBooksBar={
               <SearchBooksBar 
                 className="search-books-bar"
-                searchQuery={this.searchQuery}
+                searchQuery={this.state.searchQuery}
                 handleSearchQueryChange={this.handleSearchQueryChange}
                 pathBack="/"
               />
@@ -105,7 +107,7 @@ class BooksApp extends Component {
           <div>
             <ListBooks
               className="list-books"
-              heading="My Reads"
+              heading="MyReads: A Book Lending App"
               listBooksContent={
                 <div>
                   <BookShelf
