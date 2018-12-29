@@ -11,7 +11,7 @@ import BookListItem from './BookListItem'
 import Book from './Book'
 import ShelfChanger from './ShelfChanger'
 import OpenSearch from './OpenSearch'
-import { Route, Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 class BooksApp extends Component {
   state = {
