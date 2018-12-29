@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import './App.css'
 import * as BooksAPI from './BooksAPI'
+import SearchBookResults from './SearchBookResults'
 import BookShelf from './BookShelf'
 import BookList from './BookList'
+import BookListItem from './BookListItem'
 import Book from './Book'
 import ShelfChanger from './ShelfChanger'
 import { Route, Link } from 'react-router-dom'
-import SearchBooks from './SearchBooks'
+//import SearchBooks from './SearchBooks'
 
 class BooksApp extends Component {
   state = {
@@ -65,34 +67,38 @@ class BooksApp extends Component {
                 <input 
                   type="text" 
                   placeholder="Search by title or author"
-                  onChange={this.handleSearchQueryChange}/>
+                  onChange={this.handleSearchQueryChange}
+                />
               </div>
             </div>
-            <div className="search-books-results">
-              <BookList
-                className="books-grid"
-                books={ this.state.searchResults.length === 0 ? "No result found" : this.state.searchResults
-                  .map( book => {
-                    return (
-                      <li key={book.id}>
+            <SearchBookResults
+              className="search-books-results"
+              bookList={
+                <BookList
+                  className="books-grid"
+                  books={this.state.searchResults.length === 0 ? "No results found" : this.state.searchResults.map( book => 
+                    <BookListItem
+                      key={book.id}
+                      book={
                         <Book
                           className="book"
                           cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : "Image Not Available"}
                           title={book.title}
-                          authors={book.authors}
+                          authors={book.hasOwnProperty('authors') ? book.authors : "Author Unknown"}
                           shelfChanger={
                             <ShelfChanger
                               bookID={book.id}
+                              currentShelf={book.shelf}
                               handleShelfChange={this.handleBookShelfUpdate}
-                          ></ShelfChanger>
+                            />
                           }
-                        ></Book>
-                      </li>
-                    )
-                  })
-                }>
-              </BookList>
-            </div>
+                        />
+                      }
+                    />
+                  )}
+                />
+              }
+            />
           </div>
         )}/>
         <Route exact path="/" render={ () => (
