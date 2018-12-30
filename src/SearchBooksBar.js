@@ -2,7 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function SearchBooksBar(props) {
+
   const { className, searchQuery, handleSearchQueryChange, pathBack } = props
+  
   return (
     <div className={className}>
       <button className="close-search">

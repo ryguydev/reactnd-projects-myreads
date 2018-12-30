@@ -2,7 +2,7 @@ import React from 'react'
 
 function Book(props) {
   
-  const { className, cover, title, authors, shelfChanger } = props;
+  const { className, cover, title, authors, shelf, shelfChanger } = props;
 
   return (
     <div className={className}>
@@ -19,6 +19,11 @@ function Book(props) {
         {typeof authors === 'object' ? authors.map( author => 
           <span key={author}>{author}<br/></span>
         ) : authors}
+      </div>
+      <div className="book-shelf">
+        <span style={{color: "red"}}>
+          {shelf === "currentlyReading" ? "Currently Reading" : shelf === "wantToRead" ? "Want To Read" : shelf === "read" ? "Read" : '' }
+        </span>
       </div>
     </div>
   )
