@@ -98,10 +98,11 @@ class BooksApp extends Component {
                             cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : "Image Not Available"}
                             title={book.title}
                             authors={book.hasOwnProperty('authors') ? book.authors : "Author Unknown"}
-                            shelf={this.state.books.find( obj => obj.id === book.id ) ? this.state.books.find( obj => obj.id === book.id ).shelf : undefined }
+                            shelf={this.state.books.find( obj => obj.id === book.id ) ? this.state.books.find( obj => obj.id === book.id ).shelf : "none" }
                             shelfChanger={
                               <ShelfChanger
                                 bookID={book.id}
+                                shelf={this.state.books.find( obj => obj.id === book.id ) ? this.state.books.find( obj => obj.id === book.id ).shelf : "none" }
                                 handleShelfChange={this.handleBookShelfUpdate}
                               />
                             }
@@ -140,6 +141,7 @@ class BooksApp extends Component {
                                 shelfChanger={
                                   <ShelfChanger
                                     bookID={book.id}
+                                    shelf={book.shelf}
                                     handleShelfChange={this.handleBookShelfUpdate}
                                   />
                                 }
@@ -168,6 +170,7 @@ class BooksApp extends Component {
                                 shelfChanger={
                                   <ShelfChanger
                                     bookID={book.id}
+                                    shelf={book.shelf}
                                     handleShelfChange={this.handleBookShelfUpdate}
                                   />
                                 }
@@ -196,6 +199,7 @@ class BooksApp extends Component {
                                 shelfChanger={
                                   <ShelfChanger
                                     bookID={book.id}
+                                    shelf={book.shelf}
                                     handleShelfChange={this.handleBookShelfUpdate}
                                   />
                                 }
