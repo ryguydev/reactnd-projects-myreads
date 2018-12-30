@@ -5,9 +5,9 @@ This is my initial submission for **Project 1**: _MyReads: A Book Tracking App_ 
 The application was built on top of the starter project provided, and subsequently submitted via **MyReads Project Workspace**.
 
 ## Installation
-1) Clone the [repo]() or dwonload the `.zip`.
+1) Clone the [repo]() or download the `.zip`.
 2) Run `npm install` in corresponding directory.
-2) Run `npm install` in corresponding directory.
+2) Run `npm start` in corresponding directory.
 
 ## What You're Getting
 ```bash
