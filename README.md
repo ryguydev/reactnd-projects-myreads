@@ -1,15 +1,16 @@
-# MyReads Project
+# MyReads: A Book Lending App
 
-This is my initial submission for **Project 1**: _MyReads: A Book Tracking App_ in the [Udacity React Developer Nanodegree Program](https://www.udacity.com/course/react-nanodegree--nd019?dev1=).
+MyReads app allows users to:
 
-The application was built on top of the starter project provided, and subsequently submitted via **MyReads Project Workspace**.
+1) Search for books via [Udacity's Nanodegree Books API](https://reactnd-books-api.udacity.com) and place them on various shelves on the MyReads page.
+2) Move books to/from various shelves on the MyReads page.
 
 ## Installation
-1) Clone the [repo]() or download the `.zip`.
+1) Clone the [repo](git@github.com:ryguydev/reactnd-projects-myreads.git) or download the `.zip`.
 2) Run `npm install` in corresponding directory.
 2) Run `npm start` in corresponding directory.
 
-## What You're Getting
+## App Structure
 ```bash
 ├── README.md - This file.
 ├── SEARCH_TERMS.md # The whitelisted short collection of available search terms.
