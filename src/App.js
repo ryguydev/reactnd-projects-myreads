@@ -13,23 +13,32 @@ import ShelfChanger from './ShelfChanger'
 import OpenSearch from './OpenSearch'
 import { Route } from 'react-router-dom'
 
+/**
+ * Class BooksApp serves as the main component of the entire application. All
+ * state is maintained herewithin, and all children of this component are
+ * stateless React components.
+ */
 class BooksApp extends Component {
+  /**
+   * Initialization of state variables.
+   */
   state = {
     books: [],
     searchQuery: '',
     searchResults: []
   }
-
+  /**
+   * On Mount, make request to BooksAPI for all books to set state.
+   */
   componentDidMount() {
     BooksAPI.getAll()
       .then( allBooks => {
-        this.setState({ 
-          books: allBooks,
-          searchQuery: this.searchQuery
-        })
+        this.setState({ books: allBooks })
       })
   }
-
+  /**
+   * Function handler for bookshelf updates (attached to each Book). 
+   */
   handleBookShelfUpdate = event => {
     const { id: bookID , value: shelf } = event.target
     BooksAPI.get( bookID )
@@ -40,7 +49,10 @@ class BooksApp extends Component {
         })
       ))
   }
-
+  /**
+   * Function handler for updates to the search query. Unless search
+   * results are valid/error-free, set state results to empty array.
+   */
   handleSearchQueryChange = event => {
     const { value: queryValue } = event.target
     this.setState({ searchQuery: queryValue })
