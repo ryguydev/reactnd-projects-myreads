@@ -43,12 +43,14 @@ class BooksApp extends Component {
   handleBookShelfUpdate = event => {
     const { id: bookID , value: shelf } = event.target
     BooksAPI.get( bookID )
-      .then( book => BooksAPI.update( book, shelf )
-        .then( BooksAPI.getAll()
-          .then( allBooks => {
-            this.setState({ books: allBooks })
+      .then( book => BooksAPI.update( book, shelf )  
+        .then( () => {
+            book.shelf = shelf;
+            this.setState( currentState => ({
+              books: currentState.books.filter((b) => b.id !== bookID).concat([book])
+            }))
         })
-      ))
+      )
   }
   /**
    * Function handler for updates to the search query. Unless search
