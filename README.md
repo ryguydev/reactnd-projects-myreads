@@ -6,7 +6,7 @@ MyReads app allows users to:
 2) Move books to/from various shelves on the MyReads page.
 
 ## Installation
-1) Clone the [repo](git@github.com:ryguydev/reactnd-projects-myreads.git) or download the `.zip`.
+1) Clone git@github.com:ryguydev/reactnd-projects-myreads.git or download the `.zip`.
 2) Run `npm install` in corresponding directory.
 2) Run `npm start` in corresponding directory.
 
