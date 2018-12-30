@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
+import imageNotFound from './images/imageNotAvailable.png'
 import * as BooksAPI from './BooksAPI'
 import SearchBooks from './SearchBooks'
 import SearchBooksBar from './SearchBooksBar'
@@ -95,7 +96,7 @@ class BooksApp extends Component {
                         book={
                           <Book
                             className="book"
-                            cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : "Image Not Available"}
+                            cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : imageNotFound}
                             title={book.title}
                             authors={book.hasOwnProperty('authors') ? book.authors : "Author Unknown"}
                             shelf={this.state.books.find( obj => obj.id === book.id ) ? this.state.books.find( obj => obj.id === book.id ).shelf : "none" }
@@ -135,7 +136,7 @@ class BooksApp extends Component {
                             book={
                               <Book
                                 className="book"
-                                cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : "Image Not Available"}
+                                cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : imageNotFound}
                                 title={book.title}
                                 authors={book.hasOwnProperty('authors') ? book.authors : "Author Unknown"}
                                 shelfChanger={
@@ -164,7 +165,7 @@ class BooksApp extends Component {
                             book={
                               <Book
                                 className="book"
-                                cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : "Image Not Available"}
+                                cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : imageNotFound}
                                 title={book.title}
                                 authors={book.hasOwnProperty('authors') ? book.authors : "Author Unknown"}
                                 shelfChanger={
@@ -193,7 +194,7 @@ class BooksApp extends Component {
                             book={
                               <Book
                                 className="book"
-                                cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : "Image Not Available"}
+                                cover={book.hasOwnProperty('imageLinks') ? book.imageLinks.thumbnail : imageNotFound}
                                 title={book.title}
                                 authors={book.hasOwnProperty('authors') ? book.authors : "Author Unknown"}
                                 shelfChanger={

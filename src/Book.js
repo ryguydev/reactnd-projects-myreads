@@ -8,7 +8,7 @@ function Book(props) {
     <div className={className}>
       <div className="book-top">
         <div className="book-cover" style={{ width: 128, height: 188}}>
-          <img className="book-cover-image" src={cover} alt="?" style={{ width: 128, height: 188}} />
+          <img className="book-cover-image" src={cover} alt="Book Cover" style={{ width: 128, height: 188}} />
         </div>
         <div className="book-shelf-changer">
           {shelfChanger}
